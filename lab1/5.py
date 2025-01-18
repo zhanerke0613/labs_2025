@@ -1,3 +1,4 @@
+#Variables
 x = 5
 y = "John"
 print(x)
@@ -23,3 +24,46 @@ x = 'John'
 a = 4
 A = "Sally"
 #A will not overwrite a
+
+
+#variable names
+myvar = "John"
+my_var = "John"
+_my_var = "John"
+myVar = "John"
+MYVAR = "John"
+myvar2 = "John"
+
+#assign mulitpe values
+x, y, z = "Orange", "Banana", "Cherry"
+print(x)
+print(y)
+print(z)
+x = y = z = "Orange"
+print(x)
+print(y)
+print(z)
+fruits = ["apple", "banana", "cherry"]
+x, y, z = fruits
+print(x)
+print(y)
+print(z)
+
+#output variables
+x = "Python is awesome"
+print(x)
+x = "Python"
+y = "is"
+z = "awesome"
+print(x, y, z)
+
+#global variables
+x = "awesome"
+
+def myfunc():
+  x = "fantastic"
+  print("Python is " + x)
+
+myfunc()
+
+print("Python is " + x)
