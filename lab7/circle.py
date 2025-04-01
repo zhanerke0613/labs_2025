@@ -1,56 +1,68 @@
-import pygame
-import sys
+import pygame 
 
+SCREEN_WIDTH = 700
+SCREEN_HEIGHT = 700
 
 pygame.init()
 
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-screen_width = 800
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Движение красного мяча")
-
-
-x = screen_width // 2
-y = screen_height // 2
-radius = 25      
-speed = 20        
-
+WHITE = (255, 255, 255)
+BLACK = ()
+RED = (219, 7, 1)
+FPS = 60
 clock = pygame.time.Clock()
 
-while True:
+MOVEMENT_SPEED = 20
+CIRCLE_RAD = 40
+
+
+
+#main loop 
+
+running = True
+INITIAL_X_POS = 100
+INITIAL_Y_POS = 100
+
+x = INITIAL_X_POS
+y = INITIAL_Y_POS
+
+while running:
     
+    #Getting all events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+            running = False 
+            
+            
+    pressed = pygame.key.get_pressed()
+    
+    if pressed[pygame.K_UP]:
         
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                
-                if y - radius - speed >= 0:
-                    y -= speed
-            elif event.key == pygame.K_DOWN:
-                #нижняя граница
-                if y + radius + speed <= screen_height:
-                    y += speed
-            elif event.key == pygame.K_LEFT:
-                #левая граница
-                if x - radius - speed >= 0:
-                    x -= speed
-            elif event.key == pygame.K_RIGHT:
-                #правая граница
-                if x + radius + speed <= screen_width:
-                    x += speed
-
+        y = max(CIRCLE_RAD,y - MOVEMENT_SPEED)
+        
+    if pressed[pygame.K_DOWN]:
+        
+        y = min(SCREEN_HEIGHT - CIRCLE_RAD, y + MOVEMENT_SPEED)
+        
+    if pressed[pygame.K_LEFT]:
+        
+        x = max(CIRCLE_RAD, x - MOVEMENT_SPEED)  
+    
+    if pressed[pygame.K_RIGHT]:
+        
+        x = min(SCREEN_WIDTH - CIRCLE_RAD, x + MOVEMENT_SPEED)
+        
+        
    
-    screen.fill((255, 255, 255))
+              
+    screen.fill(WHITE)
     
     
-    pygame.draw.circle(screen, (255, 0, 0), (x, y), radius)
     
-    
+    pygame.draw.circle(screen, RED, (x, y), CIRCLE_RAD)
+
+
+  
     pygame.display.flip()
-    
-    
-    clock.tick(60)
+    clock.tick(FPS)
